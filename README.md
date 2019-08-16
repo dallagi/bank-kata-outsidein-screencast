@@ -33,7 +33,7 @@ Start with a class the following structure:
 
         public void deposit(int amount);
 
-        public void withdrawal(int amount);
+        public void withdraw(int amount);
 
         public void printStatement();
 
