@@ -1,3 +1,8 @@
+package acceptance;
+
+import dev.dallagi.Account;
+import dev.dallagi.Console;
+import dev.dallagi.TransactionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
@@ -9,10 +14,11 @@ import static org.mockito.Mockito.inOrder;
 @ExtendWith(MockitoExtension.class)
 public class PrintStatementFeature {
     @Mock Console console;
+    @Mock private TransactionRepository transactionRepository;
 
     @Test
     void should_print_statement_for_all_transactions() {
-        Account account = new Account();
+        Account account = new Account(transactionRepository);
 
         account.deposit(1000);
         account.withdraw(100);
