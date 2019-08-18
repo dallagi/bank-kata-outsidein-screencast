@@ -8,11 +8,11 @@ public class Account {
     }
 
     public void deposit(int amount) {
-        transactionRepository.commit(transaction(amount));
+        transactionRepository.add(transaction(amount));
     }
 
     public void withdraw(int amount) {
-        transactionRepository.commit(transaction(-amount));
+        transactionRepository.add(transaction(-amount));
     }
 
     public void printStatement() {
