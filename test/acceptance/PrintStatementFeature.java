@@ -16,9 +16,10 @@ public class PrintStatementFeature {
     @Test
     void should_print_statement_for_all_transactions() {
         TransactionRepository transactionRepository = new TransactionRepository();
-        StatementPrinter statementPrinter = new StatementPrinter();
+        StatementPrinter statementPrinter = new StatementPrinter(console);
+        Clock clock = new Clock();
 
-        Account account = new Account(transactionRepository, statementPrinter);
+        Account account = new Account(transactionRepository, statementPrinter, clock);
 
         account.deposit(1000);
         account.withdraw(100);

@@ -1,5 +1,6 @@
 package dev.dallagi;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -14,13 +15,16 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 public class AccountShould {
     private List<Transaction> TRANSACTIONS = new ArrayList<>();
+    private String DATE = "2019-01-01";
 
     @Mock TransactionRepository transactionRepository;
     @Mock StatementPrinter statementPrinter;
+    @Mock Clock clock;
 
     @Test
-    public void store_deposit_transactions() {
-        Account account = new Account(transactionRepository, statementPrinter);
+    public void storeDepositTransactions() {
+        given(clock.todayAsString()).willReturn(DATE);
+        Account account = new Account(transactionRepository, statementPrinter, clock);
 
         account.deposit(100);
 
@@ -29,8 +33,9 @@ public class AccountShould {
     }
 
     @Test
-    public void store_withdrawal_transactions() {
-        Account account = new Account(transactionRepository, statementPrinter);
+    public void storeWithdrawalTransactions() {
+        given(clock.todayAsString()).willReturn(DATE);
+        Account account = new Account(transactionRepository, statementPrinter, clock);
 
         account.withdraw(100);
 
@@ -39,9 +44,9 @@ public class AccountShould {
     }
 
     @Test
-    public void print_statement_for_all_transactions() {
+    public void printStatementForAllTransactions() {
         given(transactionRepository.all()).willReturn(TRANSACTIONS);
-        Account account = new Account(transactionRepository, statementPrinter);
+        Account account = new Account(transactionRepository, statementPrinter, clock);
 
         account.printStatement();
 
@@ -49,6 +54,6 @@ public class AccountShould {
     }
 
     private Transaction transaction(int amount) {
-        return new Transaction(amount);
+        return new Transaction(amount, DATE);
     }
 }
