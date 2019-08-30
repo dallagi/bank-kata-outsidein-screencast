@@ -3,7 +3,6 @@ package dev.dallagi;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Collections.reverse;
 import static java.util.Collections.unmodifiableList;
 
 public class TransactionRepository {
@@ -18,9 +17,6 @@ public class TransactionRepository {
     }
 
     public List<Transaction> all() {
-        List<Transaction> transactionsCopy = new ArrayList<>(transactions);
-        reverse(transactionsCopy);
-
-        return unmodifiableList(transactionsCopy);
+        return unmodifiableList(transactions);
     }
 }

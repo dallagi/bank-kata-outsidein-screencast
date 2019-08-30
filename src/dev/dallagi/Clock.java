@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Clock {
     public String todayAsString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return today().format(formatter);
     }
 
